@@ -1,11 +1,13 @@
 import { Button, Form, Table } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ListaTareas = () => {
     const [tareas, setTareas] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredTareas, setFilteredTareas] = useState([]);
+    const Navigate = useNavigate();
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -66,14 +68,21 @@ const ListaTareas = () => {
     }
 
       // ✅ Editar tarea → manda datos al formulario
-    const handleEdit = (codigo) => {
-        
+    
 
 
     return (
-        <div>
+        <section className="container my-4">
+            <div className="d-flex justify-content-between mb-3">
+                <h1>Listado de tareas</h1>
+                <Button 
+                    className="py-0" 
+                    onClick={() => Navigate("/")}>
+                        Agregar tarea
+                    </Button>
+            </div>
             
-        </div>
+        </section>
     );
 };
 
