@@ -122,8 +122,8 @@ const ListaTareas = () => {
 
   return (
     <section className="container my-4">
-      <div className="d-flex justify-content-between mb-3">
-        <h1>Listado de tareas</h1>
+      <div className="d-flex justify-content-around mb-3">
+        <h1 className="">Listado de tareas</h1>
         <div className="d-flex justify-content-between align-items-center flex-wrap titulo-y-boton"></div>
         <Button className="py-0 btn-add" onClick={() => handleOpenModal()}>
           Agregar tarea ➕
