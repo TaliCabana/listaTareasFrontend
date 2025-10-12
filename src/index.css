@@ -8,8 +8,8 @@
  
   --sky-primary: #69c0ff;
   --sky-accent: #20063f;
-  --sky-vainilla: #a1ce0e;
-  --sky-delete: #862209;
+  --sky-vainilla: rgb(34, 235, 115);
+  --sky-delete: #bf1932;
   --sky-focus: #8a5cee;
   --sky-color-shadow: #8a5cee;
 
@@ -276,7 +276,7 @@ input[type="text"]:focus {
     --color-border: var(--sky-focus);    
         --color-shadow: var(--sky-focus);
           --color-edit-text: #262626;
-          --color-success: var(--sky-vainilla)
+          --color-success: #097577;
 }
 
 /* 🔹 Tema Básico (por defecto) */
