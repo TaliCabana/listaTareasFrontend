@@ -87,7 +87,7 @@ main {
 .btn-edit {
   background: var(--color-edit) !important;
   color: var(--color-edit-text)!important;
-  border: whitesmoke 2px solid !important;
+  border: whitesmoke 1px solid!important;
   border-radius: 8px;
   transition: transform 0.12s; 
 }
@@ -101,7 +101,7 @@ main {
 .btn-delete {
   background: var(--color-delete) !important;
   color: var(--color-text);
- border: whitesmoke !important;
+ border: whitesmoke 1px solid !important;
   border-radius: 8px;
 }
 .btn-delete:hover,
@@ -193,11 +193,6 @@ textarea:focus,
   vertical-align: middle;
 }
 
-table td:nth-child(4),
-table th:nth-child(4) {
-  padding-left: 2px;
-  padding-right: 2px;
-}
 .table td:nth-child(4) {
   display: flex;
   justify-content: space-evenly; /* o space-around */
