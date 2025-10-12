@@ -1,19 +1,40 @@
 import { Container } from "react-bootstrap";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ListaTareas from "../components/ListaTareas";
+import NavbarTareas from "../components/NavbarTareas";
+import { useState, useEffect } from "react";
 
-export default function App() {
+function App() {
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ||
+      "theme-cute" ||
+      "theme-sky" ||
+      "theme-basic"
+  );
+
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
+
   return (
-    <BrowserRouter>
-      <main>
-        <Container>
-          <Routes>
-            {/* Ruta principal → muestra la lista */}
-            <Route path="/" element={<ListaTareas />} />
-          </Routes>
-        </Container>
-      </main>
-    </BrowserRouter>
+    <>
+      <NavbarTareas theme={theme} setTheme={setTheme} />
+      <Container>
+        <ListaTareas />
+      </Container>
+
+    </>
   );
 }
 
+export default App;
+
+/*       <BrowserRouter>
+        <main>
+          <Container>
+            <Routes>
+              <Route path="/" element={<ListaTareas />} />
+            </Routes>
+          </Container>
+        </main>
+      </BrowserRouter> */

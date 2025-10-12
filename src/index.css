@@ -1,0 +1,46 @@
+:root {
+  --color-bg: #121212;
+  --color-text: #ffffff;
+  --color-primary: #0d6efd;
+  --color-accent: #198754;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* 🔹 Tema Cute */
+.theme-cute {
+  --color-bg: #fff0f6;
+  --color-text: #333;
+  --color-primary: #ff85c0;
+  --color-accent: #95f2d9;
+}
+
+/* 🔹 Tema Básico (por defecto) */
+.theme-basic {
+  --color-bg: #121212;
+  --color-text: #ffffff;
+  --color-primary: #0d6efd;
+  --color-accent: #198754;
+}
+
+/* 🔹 Tema Sky */
+.theme-sky {
+  --color-bg: #e6f7ff;
+  --color-text: #002766;
+  --color-primary: #69c0ff;
+  --color-accent: #bae7ff;
+}
+
+/* Ejemplo de uso en Bootstrap override */
+.btn-primary {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.table {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
