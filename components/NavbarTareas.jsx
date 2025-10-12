@@ -18,7 +18,7 @@ const NavbarTareas = ({ theme, setTheme }) => {
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item onClick={() => handleChangeTheme("theme-cute")}>Cute 💖</Dropdown.Item>
-              <Dropdown.Item onClick={() => handleChangeTheme("theme-sky")}>Sky 💙</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleChangeTheme("theme-sky")}>Sky 🌌</Dropdown.Item>
               <Dropdown.Item onClick={() => handleChangeTheme("theme-basic")}>Básico ⚪</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

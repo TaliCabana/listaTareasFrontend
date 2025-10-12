@@ -2,15 +2,11 @@ import { Button, Form, Table, Modal } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
-/* import { data } from "react-router-dom";
-import { set } from "react-hook-form"; */
-/* import { useNavigate } from "react-router-dom"; */
 
 const ListaTareas = () => {
   const [tareas, setTareas] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredTareas, setFilteredTareas] = useState([]);
-  /*     const Navigate = useNavigate(); */
 
   /* Estados del modal */
   const [showModal, setShowModal] = useState(false);
@@ -70,23 +66,18 @@ const ListaTareas = () => {
       cancelButtonText: "Cancelar",
       customClass: {
         popup: "swal2-popup-custom",
-        /*                 comfirmButton: 'swal2-confirm-custom',
-                cancelButton: 'swal2-cancel-custom' */
+
       },
     }).then((result) => {
       if (result.isConfirmed) {
         const nuevasTareas = [...tareas];
         nuevasTareas.splice(index, 1);
-        /*                 localStorage.setItem("tareas", JSON.stringify(tareaActual)); */
         setTareas(nuevasTareas);
         guardarEnLocalStorage(nuevasTareas);
         Swal.fire({
           title: "¡Eliminada!",
           text: "La tarea fue eliminada correctamente.",
           icon: "success",
-          /*                     customClass: {
-                        popup: 'swal2-popup-custom',
-                        confirmButton: 'btn-swal-confirm' */
         });
       }
     });
@@ -128,11 +119,6 @@ const ListaTareas = () => {
     setDescripcion("");
     setEditIndex(null);
   };
-
-  // ✅ Editar tarea → manda datos al formulario
-  /*   const handleEdit = (tarea, codigo) => {
-    Navigate("/tarea", { state: { tarea, codigo } });
-  }; */
 
   return (
     <section className="container my-4">
