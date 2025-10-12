@@ -23,6 +23,12 @@
   --danger-rgb: #dd3360;
 }
 
+* {
+  font-family: "Patrick Hand", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
 #root {
   min-height: 100vh;
   display: flex;
