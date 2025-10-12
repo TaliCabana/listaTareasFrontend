@@ -50,12 +50,12 @@ const ListaTareas = () => {
   };
 
   // ✅ Marcar tarea como completada
-    const toggleCompletada = (index) => {
+  const toggleCompletada = (index) => {
     const nuevasTareas = [...tareas];
     nuevasTareas[index].completada = !nuevasTareas[index].completada;
     setTareas(nuevasTareas);
     guardarEnLocalStorage(nuevasTareas);
-  }
+  };
 
   // 🗑 Eliminar tarea con SweetAlert2
   const handleDelete = (index) => {
@@ -150,7 +150,7 @@ const ListaTareas = () => {
             <div className="col-12 col-lg-6 col-md-8 d-flex">
               <Form.Control
                 type="text"
-                placeholder="Agregá una tarea a tu listado..."
+                placeholder="Qué tarea estás buscando? 👀"
                 className="mb-3"
                 aria-label="Buscar"
                 value={searchTerm}
@@ -235,11 +235,11 @@ const ListaTareas = () => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Cancelar
-          </Button>
           <Button variant="primary" onClick={handleSave}>
             Guardar
+          </Button>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Cancelar
           </Button>
         </Modal.Footer>
       </Modal>
