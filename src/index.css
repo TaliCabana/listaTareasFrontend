@@ -1,46 +1,322 @@
 :root {
-  --color-bg: #121212;
-  --color-text: #ffffff;
-  --color-primary: #0d6efd;
-  --color-accent: #198754;
+  --cute-aqua: #95f2d9;
+  --cute-pink: #ff85c0;
+  --cute-vainilla: #f8e65f;
+  --aqua-focus: #30d6c0ff;
+  --cute-color-shadow: #ff85c0;
+   --text-color: #20063f;
+ 
+  --sky-primary: #69c0ff;
+  --sky-accent: #20063f;
+  --sky-vainilla: #a1ce0e;
+  --sky-delete: #862209;
+  --sky-focus: #8a5cee;
+  --sky-color-shadow: #8a5cee;
+
+  --basic-primary: #1a898b;
+  --basic-accent: #1e8719;
+  --basic-vainilla: #ffe927;
+  --basic-delete: #ff0000;
+    --basic-focus: #5e68f7;
+    --basic-color-shadow: #5e68f7;
+
+  --danger-rgb: #dd3360;
 }
 
-body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+
+main {
+  flex-grow: 1;
+}
+
+.bg-footer {
+  background-color: rgb(19, 18, 18);
+  box-shadow: 10px 10px 20px 40px rgba(26, 25, 25, 0.563);
+}
+
+.bg-navbar {
+  background-color: rgb(16, 114, 114);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: var(--color-add-from) !important;
+  color: var(--color-text) !important;
+}
+
+.navbar .dropdown-menu {
+  position: absolute !important;
+  top: 100%;
+  left: 0;
+  z-index: 1050;
+  background-color: rgb(16, 114, 114) transparent;
+}
+
+/* ---------- Botones ----------- */
+
+/* Agregar */
+.btn-add {
+  border-radius: 10px;
+  border: whitesmoke 2px solid !important;
+  color: var(--color-text)!important;
+  font-weight: 600;
+  cursor: pointer;
+  background: radial-gradient(
+    circle at 20% 20%,
+    var(--color-add-from),
+    var(--color-add-to)
+  );
+  transition: transform 0.14s ease, box-shadow 0.14s ease, filter 0.14s ease;
+}
+.btn-add:hover, .btn-add:focus {
+  box-shadow: 0 0 15px var(--color-shadow) !important;
+}
+
+/* Editar */
+.btn-edit {
+  background: var(--color-edit) !important;
+  color: var(--color-edit-text)!important;
+  border: whitesmoke 2px solid !important;
+  border-radius: 8px;
+  transition: transform 0.12s; 
+}
+.btn-edit:hover,
+.btn-edit:focus {
+  color: var(--color-text);
+  box-shadow: 0 0 14px var(--color-edit);
+}
+
+/* Borrar */
+.btn-delete {
+  background: var(--color-delete) !important;
+  color: var(--color-text);
+ border: whitesmoke !important;
+  border-radius: 8px;
+}
+.btn-delete:hover,
+.btn-delete:focus {
+  background: var(--danger-rgb) !important; /* tono más oscuro */
+  color: var(--text-color) !important;
+  box-shadow: 0 0 14px var(--basic-delete);
+}
+
+/* Guardar */
+
+.btn-save {
+  background: var(--color-success) !important;
+  color: var(--color-edit-text) !important;
+  border: 2px solid whitesmoke !important;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.btn-save:hover,
+.btn-save:focus {
+  background: #1f9c6f; 
+    box-shadow: 0 0 10px var(--color-success);
+  color: var(--color-edit-text) !important;
+}
+/* ----------------------------- */
+
+/* ------- Buscador ------------ */
+
+.form-control.search-input, .form-control, input.form-control, input.form-control, input[type="text"].form-control, textarea.form-control {
+  color: var(--color-text);
+   border: 2px solid var(--color-border) !important;
+  border-radius: 8px;
+  box-shadow: none;
+  transition: box-shadow 0.16s ease, border 0.12s ease;
+}
+.search-input {
+  border: 2px solid var(--color-focus) !important;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  transition: box-shadow 0.16s ease, border 0.12s ease;
+}
+
+.search-input:hover {
+    border-color: var(--color-search-shadow);
+  box-shadow: 0 0 14px var(--color-search-shadow);
+}
+
+.search-input:focus {
+  outline: none;
+  border: 3px solid var(--color-search-shadow);
+  box-shadow: 0 0 18px var(--color-search-shadow);
+}
+
+input[type="text"]:hover,
+textarea:hover,
+.form-control.search-input:hover {
+  border-color: var(--color-search-shadow) !important;
+  box-shadow: 0 0 10px var(--color-search-shadow) !important;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+.form-control.search-input:focus {
+  border: 3px solid var(--color-search-shadow) !important;
+  box-shadow: 0 0 16px var(--color-search-shadow) !important;
+}
+
+
+.form-control {
+  background-color: transparent !important;
+  border-width: 2px !important;
+  color: inherit !important;
+  box-shadow: none !important;
+}
+/* ----------------------------- */
+
+/* ------- Tabla ------- */
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  overflow: hidden;
+}
+.table td,
+.table th {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  vertical-align: middle;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+  accent-color: var(--color-success);
+  border: 2px solid var(--color-success);
+  transform: scale(1.1);
+  cursor: pointer;
+  }
+
+input[type="checkbox"]:checked {
+  background-color: var(--color-success);
+  border-color: var(--color-success);
+}
+
+input[type="checkbox"]:hover {
+  box-shadow: 0 0 6px var(--color-success);
+}
+
+input[type="checkbox"]:focus {
+  box-shadow: 0 0 6px var(--color-success);
+}
+
+/* Inputs de agregar / editar tarea */
+input[type="text"],
+input[type="text"]:focus,
+textarea:focus {
+  border: 2px solid transparent;
+  box-shadow: none;
+  outline: none;
+  transition: box-shadow 0.16s ease, border 0.12s ease;
+}
+
+input[type="text"]:hover {
+  box-shadow: 0 0 10px var(--color-search-shadow);
+}
+
+input[type="text"]:focus {
+  border: 3px solid var(--color-search-shadow);
+  box-shadow: 0 0 14px var(--color-search-shadow);
+}
+
+  /* -------------------------------- */
+
+/* ----------  TEMAS  -------------- */
 
 /* 🔹 Tema Cute */
 .theme-cute {
-  --color-bg: #fff0f6;
-  --color-text: #333;
-  --color-primary: #ff85c0;
-  --color-accent: #95f2d9;
-}
-
-/* 🔹 Tema Básico (por defecto) */
-.theme-basic {
-  --color-bg: #121212;
-  --color-text: #ffffff;
-  --color-primary: #0d6efd;
-  --color-accent: #198754;
+   --color-text: var(--text-color);
+  --color-add-from: var(--cute-aqua);
+  --color-add-to: var(--cute-pink);
+  --color-edit: var(--cute-vainilla);
+  --color-delete: var(--danger-rgb);
+  --color-search-shadow: var(--cute-color-shadow);
+  --color-border: var(--cute-pink);
+    --color-shadow: var(--cute-pink);
+    --color-edit-text: #262626;
+    --color-success: var(--aqua-focus);
 }
 
 /* 🔹 Tema Sky */
 .theme-sky {
-  --color-bg: #e6f7ff;
-  --color-text: #002766;
-  --color-primary: #69c0ff;
-  --color-accent: #bae7ff;
+  --variant: whitesmoke;
+  --color-text: whitesmoke;
+  --color-add-from: #20063f;#20063f;
+  --color-add-to: var(--sky-primary);
+  --color-edit: var(--sky-vainilla); 
+  --color-delete: var(--sky-delete); 
+  --color-search-shadow: var(--sky-focus);
+    --color-border: var(--sky-focus);    
+        --color-shadow: var(--sky-focus);
+          --color-edit-text: #262626;
+          --color-success: var(--sky-vainilla)
 }
 
-/* Ejemplo de uso en Bootstrap override */
-.btn-primary {
-  background-color: var(--color-primary) !important;
-  border-color: var(--color-primary) !important;
+/* 🔹 Tema Básico (por defecto) */
+.theme-basic {
+  --color-bg: #f8f9fa;
+  --color-text: whitesmoke;
+  --color-add-to: var(--basic-primary);
+  --color-add-from: var(--basic-focus);
+  --color-edit: var(--basic-vainilla); 
+  --color-delete: rgb(255, 0, 0);
+  --color-search-shadow: var(--basic-focus);
+    --color-border: var(--basic-focus);
+    --color-shadow: var(--basic-focus);
+      --color-edit-text: #262626;
+      --color-success: #1e8719;
+}
+/* -------------------------------- */
+
+/* ---------- Responsive ---------- */
+@media (max-width: 576px) {
+  .table td:last-child,
+  .table th:last-child {
+    border-right: 2px solid rgba(0, 0, 0, 0.25);
+  }
+
+  .titulo-y-boton {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .btn-add {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  h1,
+  h2 {
+    margin-bottom: 0.6rem;
+  }
 }
 
-.table {
-  background-color: var(--color-bg);
-  color: var(--color-text);
+@media (min-width: 577px) and (max-width: 992px) {
+  .titulo-y-boton {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 993px) {
+  .titulo-y-boton {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+  }
 }

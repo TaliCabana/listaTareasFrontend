@@ -138,7 +138,8 @@ const ListaTareas = () => {
     <section className="container my-4">
       <div className="d-flex justify-content-between mb-3">
         <h1>Listado de tareas</h1>
-        <Button className="py-0" onClick={() => handleOpenModal()}>
+        <div className="d-flex justify-content-between align-items-center flex-wrap titulo-y-boton"></div>
+        <Button className="py-0 btn-add" onClick={() => handleOpenModal()}>
           Agregar tarea ➕
         </Button>
       </div>
@@ -151,8 +152,8 @@ const ListaTareas = () => {
               <Form.Control
                 type="text"
                 placeholder="Qué tarea estás buscando? 👀"
-                className="mb-3"
-                aria-label="Buscar"
+                className="mb-3 search-input"
+                aria-label="Buscador de tareas"
                 value={searchTerm}
                 onChange={handleSearchChange}
               />
@@ -195,12 +196,12 @@ const ListaTareas = () => {
 
                 <td className="text-center">
                   <Button
-                    className="me-2"
+                    className="mx-2 btn-edit"
                     onClick={() => handleOpenModal(tarea, i)}
                   >
                     <i className="bi bi-pencil-square"></i>
                   </Button>
-                  <Button onClick={() => handleDelete(i)}>
+                  <Button className="mx-2 btn-delete" onClick={() => handleDelete(i)}>
                     <i className="bi bi-trash"></i>
                   </Button>
                 </td>
@@ -235,7 +236,7 @@ const ListaTareas = () => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleSave}>
+          <Button className="btn-save" onClick={handleSave}>
             Guardar
           </Button>
           <Button variant="secondary" onClick={() => setShowModal(false)}>

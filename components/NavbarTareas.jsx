@@ -8,7 +8,7 @@ const NavbarTareas = ({ theme, setTheme }) => {
   };
 
   return (
-    <Navbar expand="lg" className="mb-4" style={{ backgroundColor: "var(--color-accent)" }}>
+    <Navbar expand="lg" className="mb-4 bg-navbar">
       <Container>
         <Navbar.Brand style={{ color: "var(--color-text)" }}>🌸 Lista de Tareas</Navbar.Brand>
         <Nav className="ms-auto">

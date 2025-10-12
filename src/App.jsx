@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ListaTareas from "../components/ListaTareas";
 import NavbarTareas from "../components/NavbarTareas";
 import { useState, useEffect } from "react";
+import FooterTareas from "../components/FooterTareas";
 
 function App() {
   const [theme, setTheme] = useState(
@@ -19,10 +20,12 @@ function App() {
   return (
     <>
       <NavbarTareas theme={theme} setTheme={setTheme} />
+      <main>
       <Container>
         <ListaTareas />
       </Container>
-
+      </main>
+      <FooterTareas />
     </>
   );
 }
