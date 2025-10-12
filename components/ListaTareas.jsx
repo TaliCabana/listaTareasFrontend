@@ -225,12 +225,12 @@ const ListaTareas = () => {
         <Modal.Body>
           <Form>
             <Form.Group>
-              <Form.Label>Descripción</Form.Label>
+              <Form.Label>Ingresá tu tarea abajo 👇🏽</Form.Label>
               <Form.Control
                 type="text"
                 value={descripcion}
                 onChange={(e) => setDescripcion(e.target.value)}
-                placeholder="Qué tarea vamos a agregar? 😊"
+                placeholder="Qué tarea vamos a agregar? 🤔"
               />
             </Form.Group>
           </Form>
