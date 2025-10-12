@@ -134,7 +134,7 @@ const ListaTareas = () => {
       {tareas.length > 0 && (
         <div>
           <Form className="row g-3">
-            <div className="col-12 col-lg-6 col-md-8 d-flex">
+            <div className="col-12 col-md-8 col-lg-6 d-flex">
               <Form.Control
                 type="text"
                 placeholder="Qué tarea estás buscando? 👀"
@@ -153,7 +153,7 @@ const ListaTareas = () => {
         <thead>
           <tr className="text-center">
             <th>N°</th>
-            <th>Completa</th>
+            <th>Estado</th>
             <th>Descripción</th>
             <th>Opciones</th>
           </tr>
@@ -180,14 +180,14 @@ const ListaTareas = () => {
                   {tarea.descripcion}
                 </td>
 
-                <td className="text-center">
+                <td>
                   <Button
-                    className="mx-2 btn-edit"
+                    className="m-1 btn-edit"
                     onClick={() => handleOpenModal(tarea, i)}
                   >
                     <i className="bi bi-pencil-square"></i>
                   </Button>
-                  <Button className="mx-2 btn-delete" onClick={() => handleDelete(i)}>
+                  <Button className="m-1 btn-delete" onClick={() => handleDelete(i)}>
                     <i className="bi bi-trash"></i>
                   </Button>
                 </td>
@@ -195,7 +195,7 @@ const ListaTareas = () => {
             ))
           ) : (
             <tr>
-              <td colSpan="3">No hay tareas para mostrar</td>
+              <td colSpan="4">No hay tareas para mostrar</td>
             </tr>
           )}
         </tbody>
