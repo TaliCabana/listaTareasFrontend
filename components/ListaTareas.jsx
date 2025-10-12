@@ -49,6 +49,14 @@ const ListaTareas = () => {
     localStorage.setItem("tareas", JSON.stringify(data));
   };
 
+  // ✅ Marcar tarea como completada
+    const toggleCompletada = (index) => {
+    const nuevasTareas = [...tareas];
+    nuevasTareas[index].completada = !nuevasTareas[index].completada;
+    setTareas(nuevasTareas);
+    guardarEnLocalStorage(nuevasTareas);
+  }
+
   // 🗑 Eliminar tarea con SweetAlert2
   const handleDelete = (index) => {
     Swal.fire({
@@ -158,6 +166,7 @@ const ListaTareas = () => {
         <thead>
           <tr className="text-center">
             <th>N°</th>
+            <th>Completa</th>
             <th>Descripción</th>
             <th>Opciones</th>
           </tr>
@@ -167,7 +176,23 @@ const ListaTareas = () => {
             filteredTareas.map((tarea, i) => (
               <tr key={i}>
                 <td>{i + 1}</td>
-                <td>{tarea.descripcion}</td>
+                <td>
+                  <Form.Check
+                    type="checkbox"
+                    checked={tarea.completada}
+                    onChange={() => toggleCompletada(i)}
+                  />
+                </td>
+
+                <td
+                  style={{
+                    textDecoration: tarea.completada ? "line-through" : "none",
+                    color: tarea.completada ? "gray" : "white",
+                  }}
+                >
+                  {tarea.descripcion}
+                </td>
+
                 <td className="text-center">
                   <Button
                     className="me-2"
