@@ -68,7 +68,9 @@ const ListaTareas = () => {
     }
 
       // ✅ Editar tarea → manda datos al formulario
-    
+    const handleEdit = (tarea, codigo) => {
+        Navigate("/tarea", { state: { tarea, codigo } });
+    }
 
 
     return (
@@ -77,11 +79,54 @@ const ListaTareas = () => {
                 <h1>Listado de tareas</h1>
                 <Button 
                     className="py-0" 
-                    onClick={() => Navigate("/")}>
+                    onClick={() => Navigate("/tarea")}>
                         Agregar tarea
                     </Button>
             </div>
-            
+            <div>
+                <Form className="row g-3">
+                    <div className="col-12 col-lg-6 col-md-8 d-flex">
+                <Form.Control
+                    type="text"
+                    placeholder="Buscar por descripción o código..."
+                    className="mb-3"
+                    aria-label="Buscar"
+                    value={searchTerm}
+                    onChange={handleChange}/>
+                    </div>
+                </Form>
+            </div>           
+            <Table
+            responsive
+            border
+            hover
+            variant="dark"
+            className="mt-4">
+                <thead>
+                    <tr className="text-center">
+                        <th>N°</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody className="text-center">
+                    {filteredTareas.length > 0 ? (
+                        filteredTareas.map((tarea, index) => (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{tarea.descripcion}</td>
+                                <td className="text-center">
+                                <Button className="me-2" onClick={() => handleEdit(tarea,i)}><i className="bi bi-pencil-square"></i></Button>
+                                <Button className="" onClick={()=> handleDelete(i)}><i className="bi bi-trash"></i></Button>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="3">No hay tareas para mostrar</td>
+                        </tr>
+                    )}
+                </tbody>
+            </Table>
         </section>
     );
 };
