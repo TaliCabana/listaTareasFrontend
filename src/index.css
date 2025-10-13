@@ -335,3 +335,24 @@ input[type="text"]:focus {
 .table-responsive {
   overflow-x: hidden !important;
 }
+
+.table th:nth-child(1),
+.table td:nth-child(1) {
+  width: 8%; /* N° */
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+  width: 15%; /* Estado (checkbox) */
+}
+
+.table th:nth-child(3),
+.table td:nth-child(3) {
+  width: 55%; /* Descripción */
+}
+
+.table th:nth-child(4),
+.table td:nth-child(4) {
+  width: 22%; /* Botones */
+}
+
