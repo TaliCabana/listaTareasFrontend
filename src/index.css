@@ -4,8 +4,8 @@
   --cute-vainilla: #f8e65f;
   --aqua-focus: #30d6c0ff;
   --cute-color-shadow: #ff85c0;
-   --text-color: #20063f;
- 
+  --text-color: #20063f;
+
   --sky-primary: #69c0ff;
   --sky-accent: #20063f;
   --sky-vainilla: rgb(34, 235, 115);
@@ -17,8 +17,8 @@
   --basic-accent: #1e8719;
   --basic-vainilla: #ffe927;
   --basic-delete: #ff0000;
-    --basic-focus: #5e68f7;
-    --basic-color-shadow: #5e68f7;
+  --basic-focus: #5e68f7;
+  --basic-color-shadow: #5e68f7;
 
   --danger-rgb: #dd3360;
 }
@@ -69,7 +69,7 @@ main {
 .btn-add {
   border-radius: 10px;
   border: whitesmoke 2px solid !important;
-  color: var(--color-text)!important;
+  color: var(--color-text) !important;
   font-weight: 600;
   cursor: pointer;
   background: radial-gradient(
@@ -79,17 +79,18 @@ main {
   );
   transition: transform 0.14s ease, box-shadow 0.14s ease, filter 0.14s ease;
 }
-.btn-add:hover, .btn-add:focus {
+.btn-add:hover,
+.btn-add:focus {
   box-shadow: 0 0 15px var(--color-shadow) !important;
 }
 
 /* Editar */
 .btn-edit {
   background: var(--color-edit) !important;
-  color: var(--color-edit-text)!important;
-  border: whitesmoke 1px solid!important;
+  color: var(--color-edit-text) !important;
+  border: whitesmoke 1px solid !important;
   border-radius: 8px;
-  transition: transform 0.12s; 
+  transition: transform 0.12s;
 }
 .btn-edit:hover,
 .btn-edit:focus {
@@ -101,7 +102,7 @@ main {
 .btn-delete {
   background: var(--color-delete) !important;
   color: var(--color-text);
- border: whitesmoke 1px solid !important;
+  border: whitesmoke 1px solid !important;
   border-radius: 8px;
 }
 .btn-delete:hover,
@@ -124,17 +125,22 @@ main {
 
 .btn-save:hover,
 .btn-save:focus {
-  background: #1f9c6f; 
-    box-shadow: 0 0 10px var(--color-success);
+  background: #1f9c6f;
+  box-shadow: 0 0 10px var(--color-success);
   color: var(--color-edit-text) !important;
 }
 /* ----------------------------- */
 
 /* ------- Buscador ------------ */
 
-.form-control.search-input, .form-control, input.form-control, input.form-control, input[type="text"].form-control, textarea.form-control {
+.form-control.search-input,
+.form-control,
+input.form-control,
+input.form-control,
+input[type="text"].form-control,
+textarea.form-control {
   color: var(--color-text);
-   border: 2px solid var(--color-border) !important;
+  border: 2px solid var(--color-border) !important;
   border-radius: 8px;
   box-shadow: none;
   transition: box-shadow 0.16s ease, border 0.12s ease;
@@ -147,7 +153,7 @@ main {
 }
 
 .search-input:hover {
-    border-color: var(--color-search-shadow);
+  border-color: var(--color-search-shadow);
   box-shadow: 0 0 14px var(--color-search-shadow);
 }
 
@@ -171,7 +177,6 @@ textarea:focus,
   box-shadow: 0 0 16px var(--color-search-shadow) !important;
 }
 
-
 .form-control {
   background-color: transparent !important;
   border-width: 2px !important;
@@ -193,19 +198,18 @@ textarea:focus,
 .table th {
   border: 1px solid rgba(0, 0, 0, 0.2);
   vertical-align: middle !important;
-justify-content: space-around !important;
-    align-items: center;
-
+  justify-content: space-around !important;
+  align-items: center;
 }
 
 input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
+  appearance: none;
+  -webkit-appearance: none;
   accent-color: var(--color-success);
   border: 2px solid var(--color-success);
   transform: scale(1.1);
   cursor: pointer;
-  }
+}
 
 input[type="checkbox"]:checked {
   background-color: var(--color-success);
@@ -240,37 +244,37 @@ input[type="text"]:focus {
   box-shadow: 0 0 14px var(--color-search-shadow);
 }
 
-  /* -------------------------------- */
+/* -------------------------------- */
 
 /* ----------  TEMAS  -------------- */
 
 /* 🔹 Tema Cute */
 .theme-cute {
-   --color-text: var(--text-color);
+  --color-text: var(--text-color);
   --color-add-from: var(--cute-aqua);
   --color-add-to: var(--cute-pink);
   --color-edit: var(--cute-vainilla);
   --color-delete: var(--danger-rgb);
   --color-search-shadow: var(--cute-color-shadow);
   --color-border: var(--cute-pink);
-    --color-shadow: var(--cute-pink);
-    --color-edit-text: #262626;
-    --color-success: var(--aqua-focus);
+  --color-shadow: var(--cute-pink);
+  --color-edit-text: #262626;
+  --color-success: var(--aqua-focus);
 }
 
 /* 🔹 Tema Sky */
 .theme-sky {
   --variant: whitesmoke;
   --color-text: whitesmoke;
-  --color-add-from: #20063f;#20063f;
+  --color-add-from: #20063f;
   --color-add-to: var(--sky-primary);
-  --color-edit: var(--sky-vainilla); 
-  --color-delete: var(--sky-delete); 
+  --color-edit: var(--sky-vainilla);
+  --color-delete: var(--sky-delete);
   --color-search-shadow: var(--sky-focus);
-    --color-border: var(--sky-focus);    
-        --color-shadow: var(--sky-focus);
-          --color-edit-text: #262626;
-          --color-success: #097577;
+  --color-border: var(--sky-focus);
+  --color-shadow: var(--sky-focus);
+  --color-edit-text: #262626;
+  --color-success: #097577;
 }
 
 /* 🔹 Tema Básico (por defecto) */
@@ -279,13 +283,13 @@ input[type="text"]:focus {
   --color-text: whitesmoke;
   --color-add-to: var(--basic-primary);
   --color-add-from: var(--basic-focus);
-  --color-edit: var(--basic-vainilla); 
+  --color-edit: var(--basic-vainilla);
   --color-delete: rgb(255, 0, 0);
   --color-search-shadow: var(--basic-focus);
-    --color-border: var(--basic-focus);
-    --color-shadow: var(--basic-focus);
-      --color-edit-text: #262626;
-      --color-success: #1e8719;
+  --color-border: var(--basic-focus);
+  --color-shadow: var(--basic-focus);
+  --color-edit-text: #262626;
+  --color-success: #1e8719;
 }
 /* -------------------------------- */
 
