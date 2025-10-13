@@ -185,18 +185,17 @@ textarea:focus,
 .table {
   border-collapse: collapse;
   width: 100%;
-  overflow: hidden;
+  overflow: hidden !important;
+  table-layout: fixed !important;
+  word-wrap: break-word;
 }
 .table td,
 .table th {
   border: 1px solid rgba(0, 0, 0, 0.2);
-  vertical-align: middle;
-}
+  vertical-align: middle !important;
+justify-content: space-around !important;
+    align-items: center;
 
-.table td:nth-child(4) {
-  display: flex;
-  justify-content: space-evenly; /* o space-around */
-  align-items: center;
 }
 
 input[type="checkbox"] {
@@ -331,4 +330,8 @@ input[type="text"]:focus {
     align-items: center;
     justify-content: space-between;
   }
+}
+
+.table-responsive {
+  overflow-x: hidden !important;
 }

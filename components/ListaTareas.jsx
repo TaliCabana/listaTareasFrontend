@@ -66,7 +66,6 @@ const ListaTareas = () => {
       cancelButtonText: "Cancelar",
       customClass: {
         popup: "swal2-popup-custom",
-
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -181,15 +180,19 @@ const ListaTareas = () => {
                 </td>
 
                 <td>
-                  <Button
-                    className="m-1 btn-edit"
-                    onClick={() => handleOpenModal(tarea, i)}
-                  >
-                    <i className="bi bi-pencil-square"></i>
-                  </Button>
-                  <Button className="m-1 btn-delete" onClick={() => handleDelete(i)}>
-                    <i className="bi bi-trash"></i>
-                  </Button>
+                    <Button
+                      className="m-1 btn-edit"
+                      onClick={() => handleOpenModal(tarea, i)}
+                    >
+                      <i className="bi bi-pencil-square"></i>
+                    </Button>
+                    <Button
+                      className="m-1 btn-delete"
+                      onClick={() => handleDelete(i)}
+                    >
+                      <i className="bi bi-trash"></i>
+                    </Button>
+                  
                 </td>
               </tr>
             ))
@@ -215,6 +218,8 @@ const ListaTareas = () => {
               <Form.Control
                 type="text"
                 value={descripcion}
+                minLength={3}
+                maxLength={100}
                 onChange={(e) => setDescripcion(e.target.value)}
                 placeholder="Qué tarea vamos a agregar? 🤔"
               />
