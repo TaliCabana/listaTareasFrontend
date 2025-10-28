@@ -1,4 +1,4 @@
-const tareasBackend = import.meta.env.VITE_API_PRODUCTOS;
+const tareasBackend = import.meta.env.VITE_API_TAREAS;
 
 export const listarTareas = async () => {
   try {
@@ -10,3 +10,7 @@ export const listarTareas = async () => {
     return null;
   }
 };
+
+export const listarTareasPorId = (id) => {
+  return fetch (`${tareasBackend}/${id}`)
+}

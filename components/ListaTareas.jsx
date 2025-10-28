@@ -12,7 +12,7 @@ const ListaTareas = () => {
   /* Estados del modal */
   const [showModal, setShowModal] = useState(false);
   const [descripcion, setDescripcion] = useState("");
-  const [editIndex, setEditIndex] = useState(null);
+  const [editId, setEditId] = useState(null);
 
   /* Buscar tareas */
   const handleSearchChange = (e) => {
@@ -34,30 +34,29 @@ const ListaTareas = () => {
   }, [searchTerm, tareas]);
 
   // ✅ Cargar tareas desde localStorage al iniciar
-/*   useEffect(() => {
+  /*   useEffect(() => {
     const data = localStorage.getItem("tareas");
     if (data) {
       setTareas(JSON.parse(data));
     }
   }, []); */
 
-    // ✅ Cargar tareas SIN localStorage al iniciar
-  useEffect (()=>{
-  obtenerTareas();
-},[])
+  // ✅ Cargar tareas desde el backend al iniciar
+  useEffect(() => {
+    obtenerTareas();
+  }, []);
 
-    // ✅ Obtener tareas
+  // ✅ Obtener tareas
   const obtenerTareas = async () => {
     // 1- solicitar los datos al backend con la función de queries
-    const respuesta = await listarTareas()
+    const respuesta = await listarTareas();
     // 2- Verificar que los datos llegaron correctamente -> utilizo .json para acceder al body
-    if (respuesta.status===200){
-      const datos = await respuesta.json()
+    if (respuesta.status === 200) {
+      const datos = await respuesta.json();
       // 3- Cargo los producto en el state
-      setTareas(datos)
+      setTareas(datos);
     }
-  }
-
+  };
 
   // 💾 Guardar tareas en localStorage
   const guardarEnLocalStorage = (data) => {
@@ -65,11 +64,11 @@ const ListaTareas = () => {
   };
 
   // ✅ Marcar tarea como completada
-  const toggleCompletada = (index) => {
-    const nuevasTareas = [...tareas];
-    nuevasTareas[index].completada = !nuevasTareas[index].completada;
+  const toggleCompletada = (id) => {
+    const nuevasTareas = tareas.map((tarea) =>
+      tarea._id === id ? { ...tarea, completada: !tarea.completada } : tarea
+    );
     setTareas(nuevasTareas);
-    guardarEnLocalStorage(nuevasTareas);
   };
 
   // 🗑 Eliminar tarea con SweetAlert2
@@ -88,8 +87,7 @@ const ListaTareas = () => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        const nuevasTareas = [...tareas];
-        nuevasTareas.splice(index, 1);
+        const nuevasTareas = tareas.filter((tareaX) => tareaX._id !== id);
         setTareas(nuevasTareas);
         guardarEnLocalStorage(nuevasTareas);
         Swal.fire({
@@ -101,14 +99,23 @@ const ListaTareas = () => {
     });
   };
 
+  // ✅ Función para traer la tarea desde backend antes de editar
+  const buscarTareaPorId = async (id) => {
+    const respuesta = await listarTareaPorId(id);
+    if (respuesta.status === 200) {
+      const tareaBuscada = await respuesta.json();
+      setDescripcion(tareaBuscada.descripcion);
+      setEditId(tareaBuscada._id);
+    }
+  };
+
   // Abrir moodal (para agregar o editar)
-  const handleOpenModal = (tarea = null, index = null) => {
+  const handleOpenModal = (tarea = null) => {
     if (tarea) {
-      setDescripcion(tarea.descripcion);
-      setEditIndex(index);
+      buscarTareaPorId(tarea._id);
     } else {
       setDescripcion("");
-      setEditIndex(null);
+      setEditId(null);
     }
     setShowModal(true);
   };
@@ -119,23 +126,27 @@ const ListaTareas = () => {
       Swal.fire("Error", "La descripción no puede estar vacía.", "error");
       return;
     }
-    const nuevasTareas = [...tareas];
-
-    if (editIndex !== null) {
-      // Editar tarea existente
-      nuevasTareas[editIndex] = { descripcion };
+    // Editar tarea existente
+    if (editId) {
+      const nuevasTareas = tareas.map((tarea) =>
+        tarea._id === editId ? { ...tarea, descripcion } : tarea
+      );
+      setTareas(nuevasTareas);
       Swal.fire("Editada", "La tarea fue editada correctamente.", "success");
     } else {
-      // Agregar nueva tarea
-      nuevasTareas.push({ descripcion });
-      completada: false;
+      // Agregar nueva tarea (con id provisorio, hasta que mongodb le asigne _id)
+      const nuevasTareas = {
+        _id: "_" + Math.random().toString(36).substring(2,9),
+        descripcion,
+        completada: false,
+      };
+      setTareas([...tareas, nuevasTareas]);
       Swal.fire("Agregada", "La tarea fue agregada correctamente.", "success");
     }
-    setTareas(nuevasTareas);
     guardarEnLocalStorage(nuevasTareas);
     setShowModal(false);
     setDescripcion("");
-    setEditIndex(null);
+    setEditId(null);
   };
 
   return (
@@ -179,13 +190,13 @@ const ListaTareas = () => {
         <tbody className="text-center">
           {filteredTareas.length > 0 ? (
             filteredTareas.map((tarea, i) => (
-              <tr key={i}>
+              <tr key={tarea._id}>
                 <td>{i + 1}</td>
                 <td>
                   <Form.Check
                     type="checkbox"
                     checked={tarea.completada}
-                    onChange={() => toggleCompletada(i)}
+                    onChange={() => toggleCompletada(tarea._id)}
                   />
                 </td>
 
@@ -199,19 +210,18 @@ const ListaTareas = () => {
                 </td>
 
                 <td>
-                    <Button
-                      className="m-1 btn-edit"
-                      onClick={() => handleOpenModal(tarea, i)}
-                    >
-                      <i className="bi bi-pencil-square"></i>
-                    </Button>
-                    <Button
-                      className="m-1 btn-delete"
-                      onClick={() => handleDelete(i)}
-                    >
-                      <i className="bi bi-trash"></i>
-                    </Button>
-                  
+                  <Button
+                    className="m-1 btn-edit"
+                    onClick={() => handleOpenModal(tarea)}
+                  >
+                    <i className="bi bi-pencil-square"></i>
+                  </Button>
+                  <Button
+                    className="m-1 btn-delete"
+                    onClick={() => handleDelete(tarea._id)}
+                  >
+                    <i className="bi bi-trash"></i>
+                  </Button>
                 </td>
               </tr>
             ))
@@ -227,7 +237,7 @@ const ListaTareas = () => {
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title>
-            {editIndex !== null ? "Editar Tarea" : "Agregar nueva tarea"}
+            {editId !== null ? "Editar Tarea" : "Agregar nueva tarea"}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
