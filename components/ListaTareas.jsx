@@ -2,6 +2,7 @@ import { Button, Form, Table, Modal } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { listarTareas } from "../src/helpers/queries";
 
 const ListaTareas = () => {
   const [tareas, setTareas] = useState([]);
@@ -33,12 +34,30 @@ const ListaTareas = () => {
   }, [searchTerm, tareas]);
 
   // ✅ Cargar tareas desde localStorage al iniciar
-  useEffect(() => {
+/*   useEffect(() => {
     const data = localStorage.getItem("tareas");
     if (data) {
       setTareas(JSON.parse(data));
     }
-  }, []);
+  }, []); */
+
+    // ✅ Cargar tareas SIN localStorage al iniciar
+  useEffect (()=>{
+  obtenerTareas();
+},[])
+
+    // ✅ Obtener tareas
+  const obtenerTareas = async () => {
+    // 1- solicitar los datos al backend con la función de queries
+    const respuesta = await listarTareas()
+    // 2- Verificar que los datos llegaron correctamente -> utilizo .json para acceder al body
+    if (respuesta.status===200){
+      const datos = await respuesta.json()
+      // 3- Cargo los producto en el state
+      setTareas(datos)
+    }
+  }
+
 
   // 💾 Guardar tareas en localStorage
   const guardarEnLocalStorage = (data) => {
