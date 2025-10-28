@@ -11,6 +11,13 @@ export const listarTareas = async () => {
   }
 };
 
-export const listarTareasPorId = (id) => {
-  return fetch (`${tareasBackend}/${id}`)
+export const listarTareasPorId =  async (id) => {
+  try {
+    const respuesta = await fetch (`${tareasBackend}/${id}`)
+    console.log(respuesta)
+    return respuesta
+  } catch (error) {
+    console.error(error)
+    return null // si retorna nulo es poruqe algo falló
+  }
 }
