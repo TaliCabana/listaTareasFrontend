@@ -55,3 +55,16 @@ export const editarTarea = async (id, tarea) => {
         return null // si retorna nulo es xq algo falló
     }
 }
+
+export const borrarTarea = async (id) => {
+    try{
+        const respuesta = await fetch (`${tareasBackend}/${id}`, {
+            method: 'DELETE',
+         })
+        console.log(respuesta)
+        return respuesta
+    } catch (error) {
+        console.error(error)
+        return null // si retorna nulo es xq algo falló
+    }
+}

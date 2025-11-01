@@ -2,7 +2,7 @@ import { Button, Form, Table, Modal } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { crearTarea, editarTarea, listarTareas, listarTareasPorId } from "../src/helpers/queries";
+import { borrarTarea, crearTarea, editarTarea, listarTareas, listarTareasPorId } from "../src/helpers/queries";
 
 const ListaTareas = () => {
   const [tareas, setTareas] = useState([]);
@@ -72,7 +72,7 @@ const ListaTareas = () => {
   };
 
   // 🗑 Eliminar tarea con SweetAlert2
-  const handleDelete = (index) => {
+  const handleDelete = (id) => {
     Swal.fire({
       title: "¿Estás seguro?",
       text: "¡Esta tarea no podrás volver a verla!",
@@ -85,16 +85,22 @@ const ListaTareas = () => {
       customClass: {
         popup: "swal2-popup-custom",
       },
-    }).then((result) => {
+    }).then(async(result) => {
       if (result.isConfirmed) {
-        const nuevasTareas = tareas.filter((tareaX) => tareaX._id !== id);
-        setTareas(nuevasTareas);
-        guardarEnLocalStorage(nuevasTareas);
+        const respuesta = await borrarTarea(id);
+if (respuesta && respuesta.status ===200)
         Swal.fire({
           title: "¡Eliminada!",
           text: "La tarea fue eliminada correctamente.",
           icon: "success",
         });
+        obtenerTareas(); //  Actualizo el listado desde el backend
+      } else {
+        Swal.fire({
+          title: "Ocurrió un error",
+          text: "La tarea no pudo ser eliminada",
+          icon: "error"
+        })
       }
     });
   };
