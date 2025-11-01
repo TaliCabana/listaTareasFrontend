@@ -2,7 +2,7 @@ import { Button, Form, Table, Modal } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { listarTareas } from "../src/helpers/queries";
+import { crearTarea, editarTarea, listarTareas, listarTareasPorId } from "../src/helpers/queries";
 
 const ListaTareas = () => {
   const [tareas, setTareas] = useState([]);
@@ -101,7 +101,7 @@ const ListaTareas = () => {
 
   // ✅ Función para traer la tarea desde backend antes de editar
   const buscarTareaPorId = async (id) => {
-    const respuesta = await listarTareaPorId(id);
+    const respuesta = await listarTareasPorId(id);
     if (respuesta.status === 200) {
       const tareaBuscada = await respuesta.json();
       setDescripcion(tareaBuscada.descripcion);
@@ -121,29 +121,38 @@ const ListaTareas = () => {
   };
 
   // 💾 Guardar tarea (nueva o editada)
-  const handleSave = () => {
+  const handleSave = async() => {
     if (!descripcion.trim()) {
       Swal.fire("Error", "La descripción no puede estar vacía.", "error");
       return;
     }
     // Editar tarea existente
     if (editId) {
-      const nuevasTareas = tareas.map((tarea) =>
-        tarea._id === editId ? { ...tarea, descripcion } : tarea
-      );
-      setTareas(nuevasTareas);
-      Swal.fire("Editada", "La tarea fue editada correctamente.", "success");
+      const tareaEditada = {descripcion, completada: false}
+        const respuesta = await editarTarea (editId, tareaEditada);
+
+        if (respuesta && respuesta.status === 200){
+        Swal.fire("Editada", "La tarea fue editada correctamente.", "success");
+        obtenerTareas(); // actualizo la lista desde el backend
+        } else {
+          Swal.fire ("Error", "No se pudo editar la tarea", "error")
+        }
+  
     } else {
-      // Agregar nueva tarea (con id provisorio, hasta que mongodb le asigne _id)
+      // Agregar nueva tarea - CREAR
       const nuevasTareas = {
-        _id: "_" + Math.random().toString(36).substring(2,9),
-        descripcion,
+                descripcion,
         completada: false,
       };
-      setTareas([...tareas, nuevasTareas]);
+      const respuesta = await crearTarea(nuevasTareas)
+      if( respuesta.status === 201){
       Swal.fire("Agregada", "La tarea fue agregada correctamente.", "success");
-    }
-    guardarEnLocalStorage(nuevasTareas);
+      obtenerTareas ();
+      obtenerTareas(); // Actualiza la lista con los cambios del backend
+      } else {
+        Swal.fire("Error", "Ocurrió un problema al crear la tarea.", "error")
+      }
+    } 
     setShowModal(false);
     setDescripcion("");
     setEditId(null);
