@@ -2,7 +2,13 @@ import { Button, Form, Table, Modal } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { borrarTarea, crearTarea, editarTarea, listarTareas, listarTareasPorId } from "../src/helpers/queries";
+import {
+  borrarTarea,
+  crearTarea,
+  editarTarea,
+  listarTareas,
+  listarTareasPorId,
+} from "../src/helpers/queries";
 
 const ListaTareas = () => {
   const [tareas, setTareas] = useState([]);
@@ -85,22 +91,22 @@ const ListaTareas = () => {
       customClass: {
         popup: "swal2-popup-custom",
       },
-    }).then(async(result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         const respuesta = await borrarTarea(id);
-if (respuesta && respuesta.status ===200)
-        Swal.fire({
-          title: "¡Eliminada!",
-          text: "La tarea fue eliminada correctamente.",
-          icon: "success",
-        });
+        if (respuesta && respuesta.status === 200)
+          Swal.fire({
+            title: "¡Eliminada!",
+            text: "La tarea fue eliminada correctamente.",
+            icon: "success",
+          });
         obtenerTareas(); //  Actualizo el listado desde el backend
       } else {
         Swal.fire({
           title: "Ocurrió un error",
           text: "La tarea no pudo ser eliminada",
-          icon: "error"
-        })
+          icon: "error",
+        });
       }
     });
   };
@@ -127,38 +133,41 @@ if (respuesta && respuesta.status ===200)
   };
 
   // 💾 Guardar tarea (nueva o editada)
-  const handleSave = async() => {
+  const handleSave = async () => {
     if (!descripcion.trim()) {
       Swal.fire("Error", "La descripción no puede estar vacía.", "error");
       return;
     }
     // Editar tarea existente
     if (editId) {
-      const tareaEditada = {descripcion, completada: false}
-        const respuesta = await editarTarea (editId, tareaEditada);
+      const tareaEditada = { descripcion, completada: false };
+      const respuesta = await editarTarea(editId, tareaEditada);
 
-        if (respuesta && respuesta.status === 200){
+      if (respuesta && respuesta.status === 200) {
         Swal.fire("Editada", "La tarea fue editada correctamente.", "success");
         obtenerTareas(); // actualizo la lista desde el backend
-        } else {
-          Swal.fire ("Error", "No se pudo editar la tarea", "error")
-        }
-  
+      } else {
+        Swal.fire("Error", "No se pudo editar la tarea", "error");
+      }
     } else {
       // Agregar nueva tarea - CREAR
       const nuevasTareas = {
-                descripcion,
+        descripcion,
         completada: false,
       };
-      const respuesta = await crearTarea(nuevasTareas)
-      if( respuesta.status === 201){
-      Swal.fire("Agregada", "La tarea fue agregada correctamente.", "success");
-      obtenerTareas ();
-      obtenerTareas(); // Actualiza la lista con los cambios del backend
+      const respuesta = await crearTarea(nuevasTareas);
+      if (respuesta.status === 201) {
+        Swal.fire(
+          "Agregada",
+          "La tarea fue agregada correctamente.",
+          "success"
+        );
+        obtenerTareas();
+        obtenerTareas(); // Actualiza la lista con los cambios del backend
       } else {
-        Swal.fire("Error", "Ocurrió un problema al crear la tarea.", "error")
+        Swal.fire("Error", "Ocurrió un problema al crear la tarea.", "error");
       }
-    } 
+    }
     setShowModal(false);
     setDescripcion("");
     setEditId(null);
